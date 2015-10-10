@@ -1,0 +1,3 @@
+"Data Source=MATRIX;Initial Catalog=comment;Integrated Security=True"
+"data source=localhost,1433;User ID=a0727205804;pwd=97545696;Initial Catalog=a0727205804"
+DBCC CHECKIDENT ( table_name, RESEED, new_reseed_value )

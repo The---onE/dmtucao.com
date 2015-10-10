@@ -1,0 +1,154 @@
+﻿html,body,p {
+	margin:0 auto;
+	padding:0;
+}
+body {
+	background-color:#CCFFFF;
+	width:960px;
+}
+#logo {
+    float:left;
+    width:200px;
+    height:150px;
+    overflow: hidden;
+}
+.logo {
+    width:200px;
+    height:150px;
+    overflow: hidden;
+}
+#title {
+    width:760px;
+    height:150px;
+    overflow: hidden;
+}
+.title {
+    width:760px;
+    height:150px;
+    overflow: hidden;
+}
+#index {
+    width:960px;
+    height:32px;
+    overflow:hidden;
+}
+.index {
+    width:960px;
+    height:32px;
+    overflow:hidden;
+}
+
+#navigate {
+    width:960px;
+    height:25px;
+    overflow:hidden;
+}
+.navigate {
+    width:960px;
+    height:25px;
+    overflow:hidden;
+}
+
+#ad {
+    width:960px;
+    height:60px;
+    overflow:hidden;
+}
+
+#main {
+    float:left;
+    width:630px;
+    height:750px;
+    overflow:hidden;   
+    margin-right:10px;
+}
+.picture {
+    width:630px;
+    height:630px;
+    line-height:630px;
+    text-align:center;
+    overflow:hidden;
+}
+.page {
+    width:630px;
+    height:40px;
+    line-height:40px;
+    text-align:center;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.danmaku {
+    position:relative;
+    left:15px;
+    top:-660px;
+    z-index:10;
+    width:600px;
+    height:550px;
+    overflow:hidden;
+    
+}
+
+.review {
+    width:630px;
+    height:60px;
+    overflow:hidden;
+    margin-top:10px;
+}
+#about {
+    width:320px;
+    height:700px;
+    overflow:hidden;
+}
+.about {
+    width:320px;
+    height:700px;
+    overflow:hidden;
+}
+#data {
+    width:960px;
+    height:300px;
+    overflow:hidden;
+    margin-top:10px;
+}
+.data {
+    width:960px;
+    height:300px;
+    overflow:scroll;
+}
+
+#information
+{
+    width:960px;
+    height:00px;
+    overflow:hidden;
+    margin-top:10px;
+}
+.information
+{
+    width:960px;
+    height:200px;
+    overflow:hidden;
+}
+
+.ad1
+{
+    width:250px;
+    height:100px;
+    overflow:hidden;
+}
+.ad2
+{
+    width:250px;
+    height:250px;
+    overflow:hidden;
+}
+.ad3
+{
+    float:left;
+    width:470px;
+    height:60px;
+    overflow:hidden;
+    margin-left:5px;
+    margin-right:5px;
+}

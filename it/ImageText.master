@@ -1,0 +1,329 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ImageText.master.cs" Inherits="ImageText" EnableViewState="False" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head runat="server">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" type="text/css" href="../Styles/content.css" />
+        <script type="text/javascript" src="../Scripts/jquery-1.10.2.min.js"></script>
+
+        <asp:ContentPlaceHolder id="head" runat="server">
+        </asp:ContentPlaceHolder>
+    </head>
+    <body>
+        <form id="form1" runat="server">
+            <uc2:userinfo runat="server" ID="userinfo" />
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <div id="logo">
+                <div class="logo">
+                    <img src="../images/logo.jpg" alt="弹幕吐槽网" />
+                </div>
+            </div>
+            <div id="title">
+                <div class="title">
+                    <img src="../images/title.jpg" alt="弹幕吐槽网" />
+                </div>
+            </div>
+            <div id="index">
+                <div class="index">
+                    <uc1:Index runat="server" />
+                </div>
+            </div>
+            <div id="navigate">
+                <div class="navigate">
+                    <asp:ContentPlaceHolder id="Navigate" runat="server">
+                        <asp:HyperLink ID="IndexLink" runat="server" NavigateUrl="~/index.aspx">主页</asp:HyperLink>→<asp:Label ID="TitleLink" runat="server"></asp:Label>
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+           <%-- <div id="ad">
+                <div class="ad3">
+                </div>
+                <div class="ad3">
+                </div>
+            </div>--%>
+            <div id="control" runat="server">
+                <input type="button" id="pause" value="暂停"/>
+                <input type="button" id="start" value="继续"/>
+                <input type="button" id="hide" value="隐藏"/>
+                <input type="button" id="show" value="显示"/>
+            </div>
+            <div id="main">
+                <div class="picture">
+                    <div id="it">
+                        <asp:ContentPlaceHolder id="Picture" runat="server">
+                            <img src="../images/picture.jpg" alt="picture" />
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+                <div class="page">
+                    <input type="button" id="prev" value="上一张"/>
+                    <input type="button" id="next" value="下一张"/>
+                </div>
+                <div class="review" id="review" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:DropDownList ID="ddlType" runat="server" Height="20px" Width="120px" Font-Size="14px">
+                                <asp:ListItem Selected="True" Value="0">0:滚动弹幕</asp:ListItem>
+                                <asp:ListItem Value="1">1:顶端弹幕</asp:ListItem>
+                                <asp:ListItem Value="2">2:底端弹幕</asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:TextBox ID="txtComment" runat="server" Height="28px" Width="400px" Font-Size="20px"></asp:TextBox>
+                            <asp:Button ID="btnPost" runat="server" Height="28px" Width="60px" Font-Size="20px" Text="发送" OnClick="btnPost_Click" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="danmaku" id="danmaku" runat="server">
+
+                    <div class="comment" id="top1">
+                        <div style="width:2400px;">
+                            <div class="incomment" id="intop1" style="text-align:center;">
+                                <ul>
+                                    <li><p>&nbsp;</p></li>
+                                    <li class="tb"><p>&nbsp;</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment" id="top2">
+                        <div style="width:2400px;">
+                            <div class="incomment" id="intop2" style="text-align:center;">
+                                <ul>
+                                    <li><p>&nbsp;</p></li>
+                                    <li class="tb"><p>&nbsp;</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment" id="danmaku1">
+                        <div style="width:2400px;">
+                            <div class="incomment" id="indanmaku1">
+                                <ul>
+                                    <li class="dm1"><p>&nbsp;</p></li>
+                                    <li class="dm2"><p>&nbsp;</p></li>
+                                    <li class="dm3"><p>&nbsp;</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comment" id="danmaku2">
+                        <div style="width:2400px;">
+                            <div class="incomment" id="indanmaku2">
+                                <ul>
+                                    <li class="dm1"><p>&nbsp;</p></li>
+                                    <li class="dm2"><p>&nbsp;</p></li>
+                                    <li class="dm3"><p>&nbsp;</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment" id="danmaku3">
+                        <div style="width:2400px;">
+                            <div class="incomment" id="indanmaku3">
+                                <ul>
+                                    <li class="dm1"><p>&nbsp;</p></li>
+                                    <li class="dm2"><p>&nbsp;</p></li>
+                                    <li class="dm3"><p>&nbsp;</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment" id="danmaku4">
+                        <div style="width:2400px;">
+                            <div class="incomment" id="indanmaku4">
+                                <ul>
+                                    <li class="dm1"><p>&nbsp;</p></li>
+                                    <li class="dm2"><p>&nbsp;</p></li>
+                                    <li class="dm3"><p>&nbsp;</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment" id="danmaku5">
+                        <div style="width:2400px;">
+                            <div class="incomment" id="indanmaku5">
+                                <ul>
+                                    <li class="dm1"><p>&nbsp;</p></li>
+                                    <li class="dm2"><p>&nbsp;</p></li>
+                                    <li class="dm3"><p>&nbsp;</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment" id="danmaku6">
+                        <div style="width:2400px;">
+                            <div class="incomment" id="indanmaku6">
+                                <ul>
+                                    <li class="dm1"><p>&nbsp;</p></li>
+                                    <li class="dm2"><p>&nbsp;</p></li>
+                                    <li class="dm3"><p>&nbsp;</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment" id="danmaku7">
+                        <div style="width:2400px;">
+                            <div class="incomment" id="indanmaku7">
+                                <ul>
+                                    <li class="dm1"><p>&nbsp;</p></li>
+                                    <li class="dm2"><p>&nbsp;</p></li>
+                                    <li class="dm3"><p>&nbsp;</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment" id="bottom1">
+                        <div style="width:2400px;">
+                            <div class="incomment" id="inbottom1"  style="text-align:center;">
+                                <ul>
+                                    <li><p>&nbsp;</p></li>
+                                    <li class="tb"><p>&nbsp;</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment" id="bottom2">
+                        <div style="width:2400px;">
+                            <div class="incomment" id="inbottom2"  style="text-align:center;">
+                                <ul>
+                                    <li><p>&nbsp;</p></li>
+                                    <li class="tb"><p>&nbsp;</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="about">
+                <div class="about">
+                    <asp:ContentPlaceHolder id="About" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+            <div id="data" runat="server">
+                <div class="data">
+                    <asp:HiddenField ID="PageIndex" runat="server" Value="-1"/>
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <asp:Timer ID="Timer1" runat="server" Interval="10000" OnTick="Timer1_Tick"></asp:Timer>
+                            <asp:GridView ID="CommentTable" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="序号" DataSourceID="Comment" ForeColor="#333333" GridLines="None" Height="100px" Width="940px" PageSize="8" EnableModelValidation="True" EnableViewState="True" >
+                                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                <Columns>
+                                    <asp:BoundField DataField="序号" HeaderText="序号" InsertVisible="False" ReadOnly="True" SortExpression="序号">
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="评论" HeaderText="评论" SortExpression="评论">
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="日期" HeaderText="日期" SortExpression="日期">
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="发送者" HeaderText="发送者" SortExpression="发送者">
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="类型" HeaderText="类型" SortExpression="类型">
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="颜色" HeaderText="颜色" SortExpression="颜色">
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="字体" HeaderText="字体" SortExpression="字体">
+                                    </asp:BoundField>
+                                </Columns>
+                                <EditRowStyle BackColor="#999999" />
+                                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                            </asp:GridView>
+                            <asp:SqlDataSource ID="Comment" runat="server" ConnectionString="<%$ ConnectionStrings:dmtucaoConnectionString %>" OnSelected="Comment_Selected"></asp:SqlDataSource>
+
+                            <asp:Panel ID="NoComment" runat="server" Visible="False">
+                                <table border="0" id="Table1" style="color:#333333;height:100px;width:940px;border-collapse:collapse;">
+			                        <tr style="color:White;background-color:#5D7B9D;font-weight:bold;">
+				                        <th scope="col">序号</th><th scope="col">评论</th><th scope="col">日期</th><th scope="col">发送者</th><th scope="col">类型</th><th scope="col">颜色</th><th scope="col">字体</th>
+			                        </tr>
+                                    <tr style="color:#333333;background-color:#F7F6F3;">
+				                        <td colspan="7">暂无评论</td>
+			                        </tr>
+		                        </table>
+                            </asp:Panel>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                    <input type="hidden" value="0" id="count0"/>
+                    <input type="hidden" value="0" id="count1"/>
+                    <input type="hidden" value="0" id="count2"/>
+                </div>
+            </div>
+            <div id="information">
+                <div class="information">
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                new TopBottom("#top1", "#intop1", "1");
+                new TopBottom("#top2", "#intop2", "1");
+                new TopBottom("#bottom1", "#inbottom1", "2");
+                new TopBottom("#bottom2", "#inbottom2", "2");
+                new Danmaku("#danmaku1", "#indanmaku1");
+                new Danmaku("#danmaku2", "#indanmaku2");
+                new Danmaku("#danmaku3", "#indanmaku3");
+                new Danmaku("#danmaku4", "#indanmaku4");
+                new Danmaku("#danmaku5", "#indanmaku5");
+                new Danmaku("#danmaku6", "#indanmaku6");
+                new Danmaku("#danmaku7", "#indanmaku7");
+            </script>
+
+            <script type="text/javascript">
+                function fix() {
+                    var picture = $("#ctl00_Picture_picture")
+                    picture.css("height", "auto");
+                    picture.css("width", "auto");
+                    if (picture.width() > picture.height()) {
+                        picture.width("630px");
+                    }
+                    else {
+                        picture.height("630px");
+                    }
+                }
+                $("#prev").click(function () {
+                    var now = $("#ctl00_Picture_Index").val();
+                    var prev = parseInt(now) - 1;
+                    var page = $("#ctl00_Picture_page" + prev);
+                    if (page.length > 0) {
+                        var url = page.val();
+                        $("#ctl00_Picture_picturelink").attr('href', url);
+                        $("#ctl00_Picture_picture").load(function () { fix() });
+                        $("#ctl00_Picture_picture").attr('src', url);
+                        $("#ctl00_Picture_Index").val(prev);
+                    }
+                });
+
+                $("#next").click(function () {
+                    var now = $("#ctl00_Picture_Index").val();
+                    var next = parseInt(now) + 1;
+                    var page = $("#ctl00_Picture_page" + next);
+                    if (page.length > 0) {
+                        var url = page.val();
+                        $("#ctl00_Picture_picturelink").attr('href', url);
+                        $("#ctl00_Picture_picture").load(function () { fix() });
+                        $("#ctl00_Picture_picture").attr('src', url);
+                        $("#ctl00_Picture_Index").val(next);
+                    }
+                });
+            </script>
+
+        </form>
+    </body>
+</html>
