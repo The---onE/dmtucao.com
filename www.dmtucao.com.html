@@ -1,0 +1,40 @@
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8"></head><style>
+    #bad{border: 1px solid #DFDFDF;border-collapse: collapse;border-spacing: 0;margin: 0;}
+    #bad td, th{border: 1px solid #dfdfdf;vertical-align: middle;padding: 4px 10px 4px 5px;}
+    .zztip{display:inline-block;cursor:pointer;}
+    #bad th{background-color: #EFEFEF;}
+    #bad ul {list-style-type: none;margin:0 0 0 0;padding:0 0 0 0;}
+    #bad .more_less ul {list-style-type: decimal; padding-left: 1.5em;*margin-left:5px;}
+</style>
+<table id="bad" style="margin:30px 0 10px 0;">
+    <tr>
+        <th width="9%">漏洞级别</th>
+        <th width="16%">漏洞名称</th>
+        <th width="35%">详细内容</th>
+        <th width="40%">修复建议</th>
+    </tr>
+                <tr>
+        <td>中危</td>
+        <td><span class="zztip" title="网站程序忽略了对输入字符串中特殊字符与字符串（如&lt;&gt;&amp;#39;&amp;#34;&amp;lt;script&amp;gt;&amp;lt;iframe&amp;gt;onload）的检查，使得攻击者可以欺骗用户访问包含恶意JavaScript代码的页面，使得恶意代码在用户浏览器中执行，从而导致目标用户权限被盗取或数据被篡改。">XSS跨站脚本漏洞</span></td>
+        <td>
+        <ul>
+                                <li><a href='http://www.dmtucao.com/it/it.aspx' target="_blank" title='http://www.dmtucao.com/it/it.aspx'>http://www.dmtucao.com/it/it.aspx</a></li>
+                                            <li><a href='http://www.dmtucao.com/class/class1.aspx' target="_blank" title='http://www.dmtucao.com/class/class1.aspx'>http://www.dmtucao.com/class/class1.aspx</a></li>
+                                                                                                                                </ul>
+        </td>
+                <td class="show_hide more_less">
+            <div class="more">
+            <ul>
+                         <li>假定所有输入都是可疑的，必须对所有输入中的script、iframe等字样进行严格的检查。这里的输入不仅仅是用户可以直接交互的输入接口，也包括HTTP请求中的Cookie中的变量，HTTP请求头部中的变量等。</li>
+                         <li>不要仅仅验证数据的类型，还要验证其格式、长度、范围和内容。</li>
+                         <li>不要仅仅在客户端做数据的验证与过滤，关键的过滤步骤在服务端进行。</li>
+                         <li>对输出的数据也要检查，数据库里的值有可能会在一个大网站的多处都有输出，即使在输入做了编码等操作，在各处的输出点时也要进行安全检查。</li>
+                         <li>在网站发布之前建议测试所有已知的威胁。</li>
+                      </ul>
+            </div>
+            <div class="less" style="display:none;">
+            <ul><li>假定所有输入都是可疑的，必须对所有输入中的script、iframe等字...</li></ul>
+            </div>
+        </td>
+                </tr>
+                                                            </table>

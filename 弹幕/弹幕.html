@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1- 
+transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+<title>滚动字幕代码_无缝水平滚动-懒人建站</title> 
+<meta name="keywords" content="JS代码,js特效代码大全,jquery特效,导航菜单代码,焦点幻灯片,企业网页设计欣赏" />
+<meta name="description" content="懒人建站为您提供-js特效代码大全，JS广告代码，导航菜单代码，企业网页设计欣赏，基于jquery的特效插件，焦点幻灯片代码和各种建站技巧。" />
+</head> 
+<body> 
+<SCRIPT type=text/javascript> 
+var $ = function (id) { 
+return "string" == typeof id ? document.getElementById(id) : id; 
+}; 
+var Class = { 
+create: function() { 
+return function() { 
+this.initialize.apply(this, arguments); 
+} 
+} 
+} 
+Object.extend = function(destination, source) { 
+for (var property in source) { 
+destination[property] = source[property]; 
+} 
+return destination; 
+} 
+function addEventHandler(oTarget, sEventType, fnHandler) { 
+if (oTarget.addEventListener) { 
+oTarget.addEventListener(sEventType, fnHandler, false); 
+} else if (oTarget.attachEvent) { 
+oTarget.attachEvent("on" + sEventType, fnHandler); 
+} else { 
+oTarget["on" + sEventType] = fnHandler; 
+} 
+}; 
+var Scroller = Class.create(); 
+Scroller.prototype = { 
+initialize: function(idScroller, idScrollMid, options) { 
+var oThis = this, oScroller = $(idScroller), oScrollMid = $(idScrollMid); 
+this.SetOptions(options); 
+this.Side = this.options.Side || ["up"];//方向 
+this.scroller = oScroller; //对象 
+this.speed = this.options.Speed; //速度 
+this.timer = null; //时间 
+this.pauseHeight = 0; //定高 
+this.pauseWidth = 0; //定宽 
+this.pause = 0; //定高(宽) 
+this.side = 0; //参数 
+//用于上下滚动 
+this.heightScroller = parseInt(oScroller.style.height) || oScroller.offsetHeight; 
+this.heightList = oScrollMid.offsetHeight; 
+//用于左右滚动 
+this.widthScroller = parseInt(oScroller.style.width) || oScroller.offsetWidth; 
+this.widthList = oScrollMid.offsetWidth; 
+//js取不到css设置的height和width 
+oScroller.style.overflow = "hidden"; 
+oScrollMid.appendChild(oScrollMid.cloneNode(true)); 
+oScrollMid.appendChild(oScrollMid.cloneNode(true)); 
+addEventHandler(oScroller, "mouseover", function() { oThis.Stop(); }); 
+addEventHandler(oScroller, "mouseout", function() { oThis.Start(); }); 
+this.Start(); 
+}, 
+//设置默认属性 
+SetOptions: function(options) { 
+this.options = {//默认值 
+Step: 1,//每次变化的px量 
+Speed: 20,//速度(越大越慢) 
+Side: ["up"],//滚动方向:"up"是上，"down"是下，"left"是左，"right"是右 
+PauseHeight: 0,//隔多高停一次 
+PauseWidth: 0,//隔多宽停一次 
+//当上下和左右一起使用时必须设置PauseHeight和PauseWidth来设置转向位置 
+PauseStep: 3000//停顿时间(PauseHeight或PauseWidth大于0该参数才有效) 
+}; 
+Object.extend(this.options, options || {}); 
+}, 
+//转向 
+Turn: function() { 
+//通过设置方向数组的排列来转向 
+this.Side.push(this.Side.shift().toLowerCase()); 
+}, 
+//上下滚动 
+ScrollUpDown: function() { 
+this.pause = this.pauseHeight; 
+this.scroller.scrollTop = this.GetScroll(this.scroller.scrollTop, this.heightScroller, this.heightList, 
+this.options.PauseHeight); 
+this.pauseHeight = this.pause; 
+var oThis = this; 
+this.timer = window.setTimeout(function(){ oThis.Start(); }, this.speed); 
+}, 
+//左右滚动 
+ScrollLeftRight: function() { 
+this.pause = this.pauseWidth; 
+//注意:scrollLeft超过1400会自动变回1400 注意长度 
+this.scroller.scrollLeft = this.GetScroll(this.scroller.scrollLeft, this.widthScroller, this.widthList, 
+this.options.PauseWidth); 
+this.pauseWidth = this.pause; 
+var oThis = this; 
+this.timer = window.setTimeout(function(){ oThis.Start(); }, this.speed); 
+}, 
+//获取设置滚动数据 
+GetScroll: function(iScroll, iScroller, iList, iPause) { 
+var iStep = this.options.Step * this.side; 
+if(this.side > 0){ 
+if(iScroll >= (iList * 2 - iScroller)){ iScroll -= iList; } 
+} else { 
+if(iScroll <= 0){ iScroll += iList; } 
+} 
+this.speed = this.options.Speed; 
+if(iPause > 0){ 
+if(Math.abs(this.pause) >= iPause){ 
+this.speed = this.options.PauseStep; this.pause = iStep = 0; this.Turn(); 
+} else { 
+this.pause += iStep; 
+} 
+} 
+return (iScroll + iStep); 
+}, 
+//开始 
+Start: function() { 
+//document.getElementById("test").innerHTML+=sTurn+","; 
+//方向设置 
+switch (this.Side[0].toLowerCase()) { 
+case "right" : 
+if(this.widthList < this.widthScroller) return; 
+this.side = -1; 
+this.ScrollLeftRight(); 
+break; 
+case "left" : 
+if(this.widthList < this.widthScroller) return; 
+this.side = 1; 
+this.ScrollLeftRight(); 
+break; 
+case "down" : 
+if(this.heightList < this.heightScroller) return; 
+this.side = -1; 
+this.ScrollUpDown(); 
+break; 
+case "up" : 
+default : 
+if(this.heightList < this.heightScroller) return; 
+this.side = 1; 
+this.ScrollUpDown(); 
+} 
+}, 
+//停止 
+Stop: function() { 
+clearTimeout(this.timer); 
+} 
+}; 
+</SCRIPT> 
+<STYLE> 
+body {font-size:12px;} 
+.Scroller {line-height:20px; border:1px solid #D4D4D4; padding:0px 10px; height:20px; width:400px;} 
+.Scroller *{margin:0px; padding:0px;} 
+.ScrollMid {float:left;} 
+.ScrollMid ul{width:800px;float:left;} 
+.ScrollMid li{list-style:none; float:left; width:390px; padding-left:10px;line-height:20px; } 
+</STYLE> 
+<DIV class=Scroller id=idScroller> 
+<DIV style="WIDTH: 1600px"> 
+<DIV class=ScrollMid id=idScrollMid> 
+<UL> 
+<LI><a href="http://www.51xuediannao.com" target="_blank">懒人建站为您提供-JS广告代码，网页特效，原创建站视频和CSS技巧。</a></LI> 
+<LI><a href="http://www.51xuediannao.com" target="_blank">JS代码,js特效代码大全,jquery特效,导航菜单代码,焦点幻灯片
+</a></LI> 
+<LI><a href="http://www.51xuediannao.com" target="_blank">懒人建站为您提供-JS广告代码，网页特效，原创建站视频和CSS技巧。 
+</a></LI> 
+<LI><a href="http://www.51xuediannao.com" target="_blank">JS代码,js特效代码大全,jquery特效,导航菜单代码,焦点幻灯片
+</a></LI></UL></DIV></DIV></DIV> 
+<SCRIPT> 
+new Scroller("idScroller", "idScrollMid",{ Side:["up","left"], PauseHeight:20, PauseWidth:400 }); 
+</SCRIPT> 
+<!--下面只是说明与程序代码无关-->
+<div style="width:95%; height:auto; display:block; margin:0 auto; margin-top:30px; font-size:10pt; line-height:150%;">
+<span>本代码由<a href="http://www.51xuediannao.com" style="color:#F00;">懒人建站</a> 收集整理 我要学电脑.COM →www.51xuediannao.com </span><br>
+<a href="http://www.51xuediannao.com">懒人建站</a> http://www.51xuediannao.com<br/>
+<span>我们为您提供-
+<a href="http://www.51xuediannao.com">HTML+CSS模板</a>，
+<a href="http://www.51xuediannao.com">JS代码</a>，
+<a href="http://www.51xuediannao.com">网页特效</a>，
+<a href="http://www.51xuediannao.com">导航菜单</a>，
+<a href="http://www.51xuediannao.com">焦点幻灯片<a>，
+<a href="http://www.51xuediannao.com">网页欣赏</a>和
+<a href="http://www.51xuediannao.com">CSS技巧</a>；</span>
+<span>懒人建站只收录实用和能提高用户体验的代码</span>
+<span>我们只想解放出你的部分写代码时间来思考更高层次的设计，而不是要你懒惰、拼凑。</span>
+</body> 
+
+</div>
+
+</html>
+
